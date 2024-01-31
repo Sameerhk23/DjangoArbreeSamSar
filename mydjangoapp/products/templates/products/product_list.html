@@ -1,0 +1,21 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<h1 style="color:blue; text-align: center;">Product List</h1>
+<div class="products" style="display: grid; grid-template-columns: 1fr 1fr 1fr;">
+    {% for product in products %}
+      <div class = "product" style="padding: 10px; border: 1px solid; position:relative; padding-bottom: 40px;">
+        <img src ="{{product.thumb.url}}"/>
+        <h2><a href="{% url 'products:detail' desc=product.description %}">{{product.name}}</a></h2>
+        <P>Price:{{product.price}}</P>
+        <P>Quantity left:{{product.quantity}}</P>
+        <p class="manufacturer" style="padding: 10px; background-color: blue; position:absolute; right:0; bottom:0; margin:0; color:#0f121f;">Added by {{product.manufacturer.username}}</p>
+
+
+      </div>
+
+    {% endfor %}
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,17 @@
+ cd C:\Users\samee\OneDrive\Documents\mydjangoapp
+ my_venv\Scripts\activate 
+ cd mydjangoapp
+python manage.py runserver (to run server)
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell (interact with database using shell)
+
+
+
+from productss.models import Product
+Product.objects.all()
+
+(adding to db using shell) product = Product(name='Kinder Bueno', quantity='23', price='170', description='hazlenut wafer chocolate')
+
+
+python manage.py createsuperuser

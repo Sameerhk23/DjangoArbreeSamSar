@@ -1,0 +1,13 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <h1>Login</h1>
+    <form class="site-form" action="{% url 'accounts:login' %}" style="margin-top: 60px; border:1px solid; padding:20px; " method="post">
+        {% csrf_token %}
+        {{ form }}
+        {% if request.GET.next %}
+          <input type ="hidden" name ="next"  value="{{request.GET.next}}">
+        {% endif %}  
+        <input type="submit" value="Login" style="background: aqua; border: 0; font-size: 1.2em; border-radius: 4px; margin: 10px 0; ">
+    </form>
+{% endblock %}

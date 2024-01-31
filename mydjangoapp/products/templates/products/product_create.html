@@ -1,0 +1,12 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+  <div class="create-product">
+    <h2 >Create new listing of Product </h2>
+    <form class ="site-form" action = "{% url 'products:create' %}" method ="post" enctype="multipart/form-data" style="display: block;margin-top: 60px ; margin: 20px 0 0 0; padding: 10px; ">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type ="submit" value="Create" style="background-color: #4CAF50; display: block; color: white; padding: 10px 15px; border: 1px solid;border-radius: 4px; cursor: pointer;">
+    </form>
+  </div>
+{% endblock %}
