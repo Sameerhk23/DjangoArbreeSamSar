@@ -9,7 +9,7 @@ class Product(models.Model):
     description = models.TextField()
     thumb= models.ImageField(default='default.png',blank=True)
     manufacturer = models.ForeignKey(User, default=None,on_delete=models.CASCADE)
-    #add in manufacturer later
+    
 
 
 
@@ -19,3 +19,11 @@ class Product(models.Model):
     def snippet(self):
          return self.body[:50]+'...'
     
+class CartItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
+ 
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name}'

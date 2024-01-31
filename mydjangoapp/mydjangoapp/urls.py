@@ -35,6 +35,8 @@ urlpatterns = [
     path('blog/', views.blog),
 
     path('',product_views.product_list, name ="home"),
+
+    
 ]
 
 urlpatterns += staticfiles_urlpatterns()
