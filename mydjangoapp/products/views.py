@@ -70,3 +70,6 @@ def apply_discount(request):
         return redirect('products:view_cart')
     else:
         return redirect('products:view_cart')
+    
+
+#function for checkout     
