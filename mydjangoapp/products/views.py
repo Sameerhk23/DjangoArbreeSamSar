@@ -3,6 +3,7 @@ from .models import Product, CartItem
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .import forms
+from django.contrib import messages
 
 
 
@@ -33,7 +34,7 @@ def product_create(request):
 
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
-    total_price = sum(item.product.price * item.quantity for item in cart_items)
+    total_price = sum(item.product.price * item.quantity - item.discount for item in cart_items)
     return render(request, 'products/cart.html', {'cart_items': cart_items, 'total_price': total_price})
  
 def add_to_cart(request, product_id):
@@ -48,3 +49,24 @@ def remove_from_cart(request, item_id):
     cart_item = CartItem.objects.get(id=item_id)
     cart_item.delete()
     return redirect('products:view_cart')
+
+
+def apply_discount(request):
+    if request.method == 'POST':
+        discount_amount = request.POST.get('discount', 0)
+        try:
+            discount_amount = float(discount_amount)
+        except ValueError:
+            messages.error(request, 'Invalid discount amount. Please enter a valid number.')
+            return redirect('products:view_cart')
+
+        # Apply the discount to each cart item
+        cart_items = CartItem.objects.all()
+        for item in cart_items:
+            item.discount = discount_amount
+            item.save()
+
+        messages.success(request, f'Discount of ${discount_amount} applied to your cart.')
+        return redirect('products:view_cart')
+    else:
+        return redirect('products:view_cart')

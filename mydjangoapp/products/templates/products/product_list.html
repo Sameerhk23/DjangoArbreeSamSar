@@ -9,9 +9,14 @@
         <h2><a href="{% url 'products:detail' desc=product.description %}">{{product.name}}</a></h2>
         <P>Price:{{product.price}}</P>
         <P>Quantity left:{{product.quantity}}</P>
-        <a href ="#" class = "buy-now-button">Buy Now</a>
-        <a class="buy-now-button" href="{% url 'products:add_to_cart' product.id %}">Add to Cart</a>
-        <p class="manufacturer" style="padding: 10px; background-color: blue; position:absolute; right:0; bottom:0; margin:0; color:#0f121f;">Added by {{product.manufacturer.username}}</p>
+
+        {% if user.is_authenticated %}
+          <a href ="#" class = "buy-now-button">Buy Now</a>
+          <a class="buy-now-button" href="{% url 'products:add_to_cart' product.id %}">Add to Cart</a>
+        {% else %}
+          <p class="manufacturer" style="padding: 10px; background-color: blue; position:absolute; right:0; bottom:0; margin:0; color:#0f121f;">Added by {{product.manufacturer.username}}</p>
+        {% endif %}  
+
 
 
       </div>

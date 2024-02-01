@@ -12,6 +12,7 @@
     <div class="product-item">
         <p>{{ item.product.name }} ({{ item.quantity }})</p>
         <p>Price: ${{ item.product.price }}</p>
+        <p>Discount: ${{ item.discount }}</p>
         <a href="{% url 'products:remove_from_cart' item.id %}">Remove</a>
     </div>
     {% empty %}
@@ -21,6 +22,12 @@
     </div>
  
     <p>Total Price: ${{ total_price }}</p>
+    <form action="{% url 'products:apply_discount' %}" method="post">
+        {% csrf_token %}
+        <label for="discount">Apply Discount: $</label>
+        <input type="number" id="discount" name="discount" step="0.01" min="0" required>
+        <button type="submit">Apply</button>
+    </form>
     
  
     <a href="{% url 'products:list' %}">Continue Shopping</a>
