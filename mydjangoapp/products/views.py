@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .import forms
 from django.contrib import messages
+from .forms import CheckoutForm
 
 
 
@@ -72,4 +73,26 @@ def apply_discount(request):
         return redirect('products:view_cart')
     
 
-#function for checkout     
+#function for checkout
+@login_required
+def checkout(request):
+    cart_items = CartItem.objects.filter(user=request.user)
+
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            # Your payment processing logic goes here
+            payment_method = form.cleaned_data['payment_method']
+
+            if payment_method == 'cash':
+                # If payment is by cash, redirect to the success page
+                CartItem.objects.filter(user=request.user).delete()
+                return render(request, 'checkout_success.html')
+
+            # Continue processing for other payment methods...
+            # For a real application, you would integrate with a payment gateway
+
+    else:
+        form = CheckoutForm()
+
+    return render(request, 'checkout.html', {'cart_items': cart_items, 'form': form})

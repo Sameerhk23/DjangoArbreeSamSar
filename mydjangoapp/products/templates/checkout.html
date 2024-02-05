@@ -1,0 +1,24 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<h1 style="color: blue;
+margin: 20px 0">Checkout</h1>
+
+{% if user.is_authenticated %}
+    <div class="cart-items" style="text-align: center;
+    padding: 20px;">
+        <!-- Display cart items here... -->
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Place Order">
+    </form>
+{% else %}
+    <p>Please log in or sign up to proceed with the checkout.</p>
+    <a href="{% url 'login' %}?next={% url 'checkout' %}">Log In</a>
+    <a href="{% url 'signup' %}?next={% url 'checkout' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}
