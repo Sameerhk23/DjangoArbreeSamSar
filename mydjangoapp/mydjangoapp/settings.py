@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-0h^tw*%lx+0_ofk_f6c@f@s7irstzayyz=v2_z_0=4ynvdw+7n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -77,24 +77,13 @@ WSGI_APPLICATION = 'mydjangoapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'URL': 'postgresql://postgres:1bea53Fddec3aDdgfB2F32b5gb1136BG@monorail.proxy.rlwy.net:51192/railway',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '1bea53Fddec3aDdgfB2F32b5gb1136BG',
-        'HOST': 'monorail.proxy.rlwy.net',
-        'PORT': 51192,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -151,4 +140,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

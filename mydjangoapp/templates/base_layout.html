@@ -11,32 +11,42 @@
 <body style="background-color: #0f121f;
 background-image: url(/static/stars.png);
 color: #fff;
-font-family: Ubuntu;">
+font-family: 'Ubuntu', sans-serif">
 
-<h1 style="color:blue;"></h1>
-<nav style="text-align-last: right;">
-    <ul>
+<h1 style="color:blue; margin: 20px;"></h1>
+<h2>S^3Mart</h2>
+<nav style="text-align-last: right; padding: 10px; background-color: #333;">
+    <ul style="list-style: none;
+    padding: 0;
+    margin: 0;">
         {% if user.is_authenticated %}
-        <li>
+        <li style="display: inline-block;
+        margin-left: 20px;">
             <form class ="logout-link" action = "{% url 'accounts:logout' %}" method = "post">
                 {% csrf_token %}
                 <button type="submit" style="background: none; color: aqua; cursor: pointer; border:0;">Logout</button>
 
             </form>
         </li>
-        <li><a href = "{% url 'products:create' %}">Create New Product</a></li>
+        <li style="display: inline-block;
+        margin-left: 20px;"><a href = "{% url 'products:create' %}">Create New Product</a></li>
         {% else %}
-            <li><a href = "{% url 'accounts:login' %}">Login</a></li>
-            <li><a href = "{% url 'accounts:signup' %}">Signup</a></li>
+            <li style="display: inline-block;
+            margin-left: 20px;"><a href = "{% url 'accounts:login' %}">Login</a></li>
+            <li style="display: inline-block;
+            margin-left: 20px;"><a href = "{% url 'accounts:signup' %}">Signup</a></li>
 
         {% endif %}
     </ul>
 </nav>
-<div class="wrapper">
-    <h1><a href="{% url 'home' %}"><img src="logo.png" alt="logo"/></a></h1>
+<div class="wrapper" style="text-align: center;
+padding: 20px;">
+    <h1 style="color: blue;
+    margin: 20px 0;"><a href="{% url 'home' %}"><img src="logo.png" alt="logo"/></a></h1>
     {% block content %}
     {% endblock %}
 </div>
+<h3 style="text-align: right; padding: 10px; border: 1px solid;">23 Teish quarters, Tejgaon 0023, Dhaka, Bangladesh</h3>
 
 
 </body>
